@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { SampleController } from './sample/sample.controller';
 import { SampleService } from './sample/sample.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersService } from './users/users.service';
+import { UsersController } from './users/users.controller';
+import { UsersModule } from './users/users.module';
+import { User} from  './users/users.entity';
 
 @Module({
   imports: [
@@ -14,11 +18,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username:'root',
       password:'pass',
       database:'dev_test_webapp_db',
-      entities:[],
+      entities:[User],
       synchronize:true,
-    })
+    }),
+    UsersModule
   ],
-  controllers: [AppController, SampleController],
-  providers: [AppService, SampleService],
+  controllers: [AppController, SampleController, UsersController],
+  providers: [AppService, SampleService, UsersService],
 })
 export class AppModule {}
